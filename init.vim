@@ -1,68 +1,66 @@
-" test test
-let mapleader=" "
-
 call plug#begin('~/.config/nvim/plugged')
+Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 Plug 'Shougo/denite.nvim'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-" Plug 'ternjs/tern_for_vim'
 Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
+Plug 'lepture/vim-jinja'
 Plug 'sheerun/vim-polyglot'
 
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/NrrwRgn'
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
-Plug 'joshdick/onedark.vim'
 call plug#end()
 
 syntax on
-colorscheme onedark
+let g:airline_theme='one'
+colorscheme one
+set background=dark " for the dark version
+set background=light " for the light version
+" colorscheme onedark
 
 set expandtab
 set shiftwidth=2
 set softtabstop=2
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-xmap <Tab> <Plug>(neosnippet_expand_target)
-
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" Navigate snippet placeholders using tab
-let g:coc_snippet_next = '<C-j>'
-let g:coc_snippet_prev = '<C-k>'
-
-" Use enter to accept snippet expansion
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
-
+set timeoutlen=1000 ttimeoutlen=0
 set nobackup  " no backup or swap file, live dangerously
 set noswapfile  " swap files give annoying warning
 set number  " always show current line number
+set ignorecase " ignorecasing
 set smartcase  " better case-sensitivity when searching
 set noshowmode  " keep command line clean
 set showcmd
+set updatetime=100
+set signcolumn=yes
+set colorcolumn=80
+set textwidth=80
+set nohlsearch
+set scrolloff=999
+" set title titlestring=%(%{expand(\"%:~:.:h\")})
+set title titlestring=%{expand(\"%:p\")}
+set list
+set listchars=trail:~
 
-" easy split movement
+let g:signify_sign_add               = 'A'
+let g:signify_sign_delete            = 'D'
+let g:signify_sign_delete_first_line = 'DF'
+let g:signify_sign_change            = 'M'
+let g:signify_sign_changedelete      = 'MD'
+
+nnoremap Q @q
+"" easy split movement
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -150,6 +148,7 @@ endtry
 "   <leader>g  - Search current directory for occurences of given term and close window if no results
 "   <leader>cw - Search current directory for occurences of word under cursor
 nmap <leader>e :Denite buffer<CR>
+nmap <C-e> :Denite buffer<CR>
 nmap <leader>t :DeniteProjectDir file/rec<CR>
 nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
 nnoremap <leader>cw :<C-u>DeniteCursorWord grep:.<CR>
@@ -237,22 +236,16 @@ endfunction
 nnoremap <silent> <leader>co  :<C-u>CocList outline<cr>
 nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
 
-" List errors
-nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<cr>
+" " list commands available in tsserver (and others)
+" nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
 
-" list commands available in tsserver (and others)
-nnoremap <silent> <leader>cc  :<C-u>CocList commands<cr>
+" " restart when tsserver gets wonky
+" nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
 
-" restart when tsserver gets wonky
-nnoremap <silent> <leader>cR  :<C-u>CocRestart<CR>
-
-" view all errors
+" " view all errors
 nnoremap <silent> <leader>cl  :<C-u>CocList locationlist<CR>
 
-" manage extensions
-nnoremap <silent> <leader>cx  :<C-u>CocList extensions<cr>
-
-" rename the current word in the cursor
+" " rename the current word in the cursor
 nmap <leader>cr  <Plug>(coc-rename)
 nmap <leader>cf  <Plug>(coc-format-selected)
 vmap <leader>cf  <Plug>(coc-format-selected)
@@ -260,3 +253,58 @@ vmap <leader>cf  <Plug>(coc-format-selected)
 " run code actions
 vmap <leader>ca  <Plug>(coc-codeaction-selected)
 nmap <leader>ca  <Plug>(coc-codeaction-selected)
+
+nmap <leader>fe :CocFix<cr>
+
+nmap <C-_>   gcc
+vmap <C-_>   gcgv
+
+xmap <Tab>     <Plug>(neosnippet_expand_target)
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:NetrwIsOpen=0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
+
+" Add your own mapping. For example:
+noremap <silent> <A-1> :call ToggleNetrw()<CR>
+
+nmap [c <plug>(signify-next-hunk):SignifyHunkDiff<cr>
+nmap ]c <plug>(signify-prev-hunk):SignifyHunkDiff<cr>
+nmap <C-A-z> :SignifyHunkUndo<cr>
+
+function! s:ToggleBlame()
+    if &l:filetype ==# 'fugitiveblame'
+        close
+    else
+        Gblame
+    endif
+endfunction
+
+nnoremap <leader>bb :call <SID>ToggleBlame()<CR>
