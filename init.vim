@@ -1,6 +1,4 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'joshdick/onedark.vim'
-Plug 'rakr/vim-one'
 Plug 'Shougo/denite.nvim'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
@@ -21,13 +19,16 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
+Plug 'junegunn/limelight.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 call plug#end()
 
 syntax on
 let g:airline_theme='one'
 colorscheme one
 set background=dark " for the dark version
-set background=light " for the light version
+" set background=light " for the light version
 " colorscheme onedark
 
 set expandtab
@@ -48,10 +49,10 @@ set colorcolumn=80
 set textwidth=80
 set nohlsearch
 set scrolloff=999
-" set title titlestring=%(%{expand(\"%:~:.:h\")})
 set title titlestring=%{expand(\"%:p\")}
 set list
 set listchars=trail:~
+set autochdir
 
 let g:signify_sign_add               = 'A'
 let g:signify_sign_delete            = 'D'
@@ -59,12 +60,20 @@ let g:signify_sign_delete_first_line = 'DF'
 let g:signify_sign_change            = 'M'
 let g:signify_sign_changedelete      = 'MD'
 
+let g:neosnippet#snippets_directory="/home/rojo/.local/share/nvim/site/custom-snippets"
+
+let g:netrw_banner = 0
+let g:netrw_winsize = 20
+
 nnoremap Q @q
 "" easy split movement
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <C-w>v <C-w>v<C-w><C-w>
+nnoremap <C-w>s <C-w>s<C-w><C-w>
+
 
 nmap <leader>w :w!<cr>
 
@@ -308,3 +317,7 @@ function! s:ToggleBlame()
 endfunction
 
 nnoremap <leader>bb :call <SID>ToggleBlame()<CR>
+
+nnoremap <leader>fs :set foldmethod=syntax<cr>
+
+nmap <Leader>l :Limelight!!<cr>

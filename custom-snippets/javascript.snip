@@ -1,0 +1,64 @@
+snippet cplug
+options head
+  class ${1:#:Name}Plugin {
+    constructor(state, cfg, plugin) {
+      this.state = state;
+      this.cfg = cfg;
+      this.plugin = plugin;
+    }
+
+    getModels() {}
+
+    addRoutes() {}
+
+    addDecorator () {}
+
+    registerExtensions() {}
+  }
+
+
+snippet cfac
+options head
+  class ${1:#:Name}Facility {
+    constructor(state, cfg, plugin) {
+      this.state = state;
+      this.cfg = cfg;
+      this.plugin = plugin;
+    }
+
+    configure () { }
+  }
+
+
+snippet     cmodel
+abbr        cmodel
+options     head
+  const kb = require('knex-base');
+
+  const Model = kb.BaseModel;
+
+  class ${1:#:Name} extends Model {
+    constructor() {
+    }
+
+    static get tableName() {
+      return '${2:tableName}';
+    }
+
+    static get idColumn() {
+      return '${3:id}';
+    }
+
+    static get jsonSchema() {}
+
+    static bindConstraints(issuer, auth) {
+      const baseFunctions = super.bindConstraints(issuer, auth);
+
+      // TODO: Bind only relevant functions in this object
+      const modelFunctions = {};
+
+      return Object.assign(modelFunctions, baseFunctions);
+    }
+  }
+
+  module.exports = $1;
