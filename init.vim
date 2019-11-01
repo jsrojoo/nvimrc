@@ -76,6 +76,7 @@ nnoremap <C-w>s <C-w>s<C-w><C-w>
 
 
 nmap <leader>w :w!<cr>
+nmap <leader>q :q!<cr>
 
 " Wrap in try/catch to avoid errors on initial install before plugin is available
 try
@@ -263,7 +264,7 @@ vmap <leader>cf  <Plug>(coc-format-selected)
 vmap <leader>ca  <Plug>(coc-codeaction-selected)
 nmap <leader>ca  <Plug>(coc-codeaction-selected)
 
-nmap <leader>fe :CocFix<cr>
+nmap <leader>fe :CocCommand eslint.executeAutofix<cr>
 
 nmap <C-_>   gcc
 vmap <C-_>   gcgv
@@ -321,3 +322,12 @@ nnoremap <leader>bb :call <SID>ToggleBlame()<CR>
 nnoremap <leader>fs :set foldmethod=syntax<cr>
 
 nmap <Leader>l :Limelight!!<cr>
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+nnoremap <leader>vq vi'
+vnoremap <leader>y "+y
