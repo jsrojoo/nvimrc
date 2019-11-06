@@ -20,7 +20,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/limelight.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
 call plug#end()
 
@@ -29,7 +28,7 @@ let g:airline_theme='one'
 colorscheme one
 set background=dark " for the dark version
 " set background=light " for the light version
-" colorscheme onedark
+set termguicolors
 
 set expandtab
 set shiftwidth=2
@@ -38,6 +37,7 @@ set softtabstop=2
 set timeoutlen=1000 ttimeoutlen=0
 set nobackup  " no backup or swap file, live dangerously
 set noswapfile  " swap files give annoying warning
+set nowrapscan " stop incremental search at EOF
 set number  " always show current line number
 set ignorecase " ignorecasing
 set smartcase  " better case-sensitivity when searching
@@ -303,7 +303,7 @@ function! ToggleNetrw()
 endfunction
 
 " Add your own mapping. For example:
-noremap <silent> <A-1> :call ToggleNetrw()<CR>
+noremap <silent> <A-e> :call ToggleNetrw()<CR>
 
 nmap [c <plug>(signify-next-hunk):SignifyHunkDiff<cr>
 nmap ]c <plug>(signify-prev-hunk):SignifyHunkDiff<cr>
@@ -322,12 +322,12 @@ nnoremap <leader>bb :call <SID>ToggleBlame()<CR>
 nnoremap <leader>fs :set foldmethod=syntax<cr>
 
 nmap <Leader>l :Limelight!!<cr>
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <A-s> :m .+1<CR>==
+nnoremap <A-w> :m .-2<CR>==
+inoremap <A-s> <Esc>:m .+1<CR>==gi
+inoremap <A-w> <Esc>:m .-2<CR>==gi
+vnoremap <A-s> :m '>+1<CR>gv=gv
+vnoremap <A-w> :m '<-2<CR>gv=gv
 
-nnoremap <leader>vq vi'
+nnoremap <leader>sq vi'"+y
 vnoremap <leader>y "+y
