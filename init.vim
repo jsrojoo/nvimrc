@@ -15,6 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/NrrwRgn'
 Plug 'jiangmiao/auto-pairs'
+Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -43,7 +44,7 @@ set ignorecase " ignorecasing
 set smartcase  " better case-sensitivity when searching
 set noshowmode  " keep command line clean
 set showcmd
-set updatetime=100
+set updatetime=1000
 set signcolumn=yes
 set colorcolumn=80
 set textwidth=80
@@ -67,18 +68,20 @@ let g:netrw_winsize = 20
 
 nnoremap Q @q
 "" easy split movement
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-w>v <C-w>v<C-w><C-w>
-nnoremap <C-w>s <C-w>s<C-w><C-w>
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+nnoremap <C-n>v <C-w>v<C-w><C-w>
+nnoremap <C-n>h <C-w>s<C-w><C-w>
 
 
 nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
 " Wrap in try/catch to avoid errors on initial install before plugin is available
+let g:python3_host_prog = '/bin/python3.7'
+
 try
   " === Denite setup ==="
   " Use ripgrep for searching current directory for files
