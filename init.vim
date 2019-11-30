@@ -8,6 +8,7 @@ Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
 Plug 'lepture/vim-jinja'
 Plug 'sheerun/vim-polyglot'
+Plug 'posva/vim-vue'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -43,7 +44,6 @@ set number  " always show current line number
 set ignorecase " ignorecasing
 set smartcase  " better case-sensitivity when searching
 set noshowmode  " keep command line clean
-set showcmd
 set updatetime=1000
 set signcolumn=yes
 set colorcolumn=80
@@ -53,7 +53,8 @@ set scrolloff=999
 set title titlestring=%{expand(\"%:p\")}
 set list
 set listchars=trail:~
-set autochdir
+" set autochdir
+set statusline^=%{coc#status()}
 
 let g:signify_sign_add               = 'A'
 let g:signify_sign_delete            = 'D'
@@ -72,6 +73,8 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+nnoremap <C-w>v <C-w>v<C-w><C-w>
+nnoremap <C-w>h <C-w>s<C-w><C-w>
 nnoremap <C-n>v <C-w>v<C-w><C-w>
 nnoremap <C-n>h <C-w>s<C-w><C-w>
 
@@ -90,7 +93,7 @@ try
   "   --glob:  Include or exclues files for searching that match the given glob
   "            (aka ignore .git files)
   "
-  call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
+  call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git', '--glob', '!dist', '--glob', '!node_modules'])
 
   " Use ripgrep in place of "grep"
   call denite#custom#var('grep', 'command', ['rg'])
@@ -332,5 +335,7 @@ inoremap <A-w> <Esc>:m .-2<CR>==gi
 vnoremap <A-s> :m '>+1<CR>gv=gv
 vnoremap <A-w> :m '<-2<CR>gv=gv
 
+" mapping to select single quotes
 nnoremap <leader>sq vi'"+y
+" mapping to yank to system clipboard
 vnoremap <leader>y "+y
