@@ -25,12 +25,13 @@ Plug 'junegunn/limelight.vim'
 Plug 'rakr/vim-one'
 call plug#end()
 
+set termguicolors
 syntax on
 let g:airline_theme='one'
+let g:airline_powerline_fonts = 1
 colorscheme one
 set background=dark " for the dark version
 " set background=light " for the light version
-set termguicolors
 
 set expandtab
 set shiftwidth=2
@@ -74,9 +75,9 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 nnoremap <C-w>v <C-w>v<C-w><C-w>
-nnoremap <C-w>h <C-w>s<C-w><C-w>
-nnoremap <C-n>v <C-w>v<C-w><C-w>
-nnoremap <C-n>h <C-w>s<C-w><C-w>
+nnoremap <C-w>s <C-w>s<C-w><C-w>
+" nnoremap <C-n>v <C-w>v<C-w><C-w>
+" nnoremap <C-n>h <C-w>s<C-w><C-w>
 
 
 nmap <leader>w :w!<cr>
@@ -225,7 +226,7 @@ if (empty($TMUX))
   endif
 endif
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " gd - go to definition of word under cursor
 nmap <silent> gd <Plug>(coc-definition)
