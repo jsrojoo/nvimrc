@@ -10,7 +10,8 @@ Plug 'lepture/vim-jinja'
 Plug 'sheerun/vim-polyglot'
 Plug 'posva/vim-vue'
 
-Plug 'tpope/vim-commentary'
+" Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -23,11 +24,13 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/limelight.vim'
 Plug 'rakr/vim-one'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'jaredgorski/spacecamp'
 call plug#end()
 
 set termguicolors
 syntax on
-let g:airline_theme='one'
+let g:airline_theme='soda'
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -55,9 +58,10 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.dirty='⚡'
 
-colorscheme one
 set background=dark " for the dark version
 " set background=light " for the light version
+colorscheme Tomorrow-Night
+" colorscheme spacecamp
 
 set expandtab
 set shiftwidth=2
@@ -66,6 +70,7 @@ set softtabstop=2
 set timeoutlen=1000 ttimeoutlen=0
 set nobackup  " no backup or swap file, live dangerously
 set noswapfile  " swap files give annoying warning
+set nowrap
 set nowrapscan " stop incremental search at EOF
 set number  " always show current line number
 set ignorecase " ignorecasing
@@ -110,7 +115,7 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
 " Wrap in try/catch to avoid errors on initial install before plugin is available
-let g:python3_host_prog = '/bin/python3.7'
+let g:python3_host_prog = '/usr/bin/python3'
 
 try
   " === Denite setup ==="
@@ -355,12 +360,12 @@ nnoremap <leader>bb :call <SID>ToggleBlame()<CR>
 nnoremap <leader>fs :set foldmethod=syntax<cr>
 
 nmap <Leader>l :Limelight!!<cr>
-nnoremap <A-s> :m .+1<CR>==
-nnoremap <A-w> :m .-2<CR>==
-inoremap <A-s> <Esc>:m .+1<CR>==gi
-inoremap <A-w> <Esc>:m .-2<CR>==gi
-vnoremap <A-s> :m '>+1<CR>gv=gv
-vnoremap <A-w> :m '<-2<CR>gv=gv
+nnoremap <Down> :m .+1<CR>==
+nnoremap <Up> :m .-2<CR>==
+inoremap <Down> <Esc>:m .+1<CR>==gi
+inoremap <Up> <Esc>:m .-2<CR>==gi
+vnoremap <Down> :m '>+1<CR>gv=gv
+vnoremap <Up> :m '<-2<CR>gv=gv
 
 " mapping to select single quotes
 nnoremap <leader>sq vi'"+y
