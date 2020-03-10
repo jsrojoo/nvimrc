@@ -7,7 +7,8 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
 Plug 'lepture/vim-jinja'
-Plug 'sheerun/vim-polyglot'
+Plug 'alvan/vim-closetag'
+" Plug 'sheerun/vim-polyglot'
 Plug 'posva/vim-vue'
 
 " Plug 'tpope/vim-commentary'
@@ -371,3 +372,12 @@ vnoremap <Up> :m '<-2<CR>gv=gv
 nnoremap <leader>sq vi'"+y
 " mapping to yank to system clipboard
 vnoremap <leader>y "+y
+
+let g:LanguageClient_serverCommands = {
+    \ 'vue': ['vls']
+    \ }
+
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.vue'
