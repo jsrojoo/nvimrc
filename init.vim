@@ -31,7 +31,7 @@ call plug#end()
 
 set termguicolors
 syntax on
-let g:airline_theme='soda'
+let g:airline_theme='one'
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -59,9 +59,10 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.dirty='⚡'
 
-set background=dark " for the dark version
-" set background=light " for the light version
-colorscheme Tomorrow-Night
+" set background=dark " for the dark version
+set background=light " for the light version
+" colorscheme Tomorrow-Night
+colorscheme one
 " colorscheme spacecamp
 
 set expandtab
