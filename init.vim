@@ -20,6 +20,7 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'chrisbra/Colorizer'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
@@ -59,8 +60,8 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.dirty='⚡'
 
-" set background=dark " for the dark version
-set background=light " for the light version
+set background=dark " for the dark version
+" set background=light " for the light version
 " colorscheme Tomorrow-Night
 colorscheme one
 " colorscheme spacecamp
@@ -117,7 +118,7 @@ nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr>
 
 " Wrap in try/catch to avoid errors on initial install before plugin is available
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/usr/bin/python'
 
 try
   " === Denite setup ==="
