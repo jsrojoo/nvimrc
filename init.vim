@@ -1,5 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/denite.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
 Plug 'Shougo/neosnippet.vim'
@@ -8,10 +10,8 @@ Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
 Plug 'lepture/vim-jinja'
 Plug 'alvan/vim-closetag'
-" Plug 'sheerun/vim-polyglot'
 Plug 'posva/vim-vue'
 
-" Plug 'tpope/vim-commentary'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -19,18 +19,21 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/NrrwRgn'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 Plug 'chrisbra/Colorizer'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/limelight.vim'
+
 Plug 'rakr/vim-one'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'jaredgorski/spacecamp'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
-set termguicolors
+" set termguicolors
 syntax on
 let g:airline_theme='one'
 let g:airline_powerline_fonts = 1
@@ -62,8 +65,9 @@ let g:airline_symbols.dirty='⚡'
 
 set background=dark " for the dark version
 " set background=light " for the light version
-" colorscheme Tomorrow-Night
+" colorscheme Tomorrow
 colorscheme one
+" colorscheme gruvbox
 " colorscheme spacecamp
 
 set expandtab
@@ -90,6 +94,10 @@ set list
 set listchars=trail:~
 " set autochdir
 set statusline^=%{coc#status()}
+set relativenumber
+set foldmethod=indent
+
+let g:mkdp_browser = 'firefox'
 
 let g:signify_sign_add               = 'A'
 let g:signify_sign_delete            = 'D'
@@ -120,6 +128,23 @@ nmap <leader>q :q!<cr>
 " Wrap in try/catch to avoid errors on initial install before plugin is available
 let g:python3_host_prog = '/usr/bin/python'
 
+" FZF autocommands
+"
+"
+if has("nvim")
+    " Escape inside a FZF terminal window should exit the terminal window
+    " rather than going into the terminal's normal mode.
+    autocmd FileType fzf tnoremap <buffer> <Esc> <Esc>
+endif
+
+" FZF mappings
+"
+"
+nmap <leader>g :Rg<Space>
+nmap <leader>T :Files<CR>
+nmap <leader>cw :Rg <C-R><C-W><CR>
+
+
 try
   " === Denite setup ==="
   " Use ripgrep for searching current directory for files
@@ -128,7 +153,12 @@ try
   "   --glob:  Include or exclues files for searching that match the given glob
   "            (aka ignore .git files)
   "
-  call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git', '--glob', '!dist', '--glob', '!node_modules'])
+  call denite#custom#var('file/rec', 'command',
+        \ ['rg', '--files',
+        \ '--glob', '!.git',
+        \ '--glob', '!dist',
+        \ '--glob', '!node_modules'
+        \ ])
 
   " Use ripgrep in place of "grep"
   call denite#custom#var('grep', 'command', ['rg'])
@@ -199,10 +229,9 @@ endtry
 "   <leader>g  - Search current directory for occurences of given term and close window if no results
 "   <leader>cw - Search current directory for occurences of word under cursor
 nmap <leader>e :Denite buffer<CR>
-nmap <C-e> :Denite buffer<CR>
 nmap <leader>t :DeniteProjectDir file/rec<CR>
-nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
-nnoremap <leader>cw :<C-u>DeniteCursorWord grep:.<CR>
+" nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+" nnoremap <leader>cw :<C-u>DeniteCursorWord grep:.<CR>
 
 " Define mappings while in 'filter' mode
 "   <C-o>         - Switch to normal mode inside of search results
@@ -247,17 +276,15 @@ endfunction
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+  set termguicolors
 endif
 
 " autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -361,6 +388,7 @@ endfunction
 nnoremap <leader>bb :call <SID>ToggleBlame()<CR>
 
 nnoremap <leader>fs :set foldmethod=syntax<cr>
+nnoremap <leader>fi :set foldmethod=indent<cr>
 
 nmap <Leader>l :Limelight!!<cr>
 nnoremap <Down> :m .+1<CR>==
