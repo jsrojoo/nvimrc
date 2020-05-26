@@ -10,9 +10,9 @@ Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
 " Plug 'lepture/vim-jinja'
 Plug 'alvan/vim-closetag'
-" Plug 'posva/vim-vue'
+" Plug 'leafOfTree/vim-vue-plugin'
+Plug 'posva/vim-vue'
 
-Plug 'leafOfTree/vim-vue-plugin'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -415,3 +415,4 @@ let g:LanguageClient_serverCommands = {
 " These are the file extensions where this plugin is enabled.
 "
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.vue'
+let g:vue_disable_pre_processors=1
