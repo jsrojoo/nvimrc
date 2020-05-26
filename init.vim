@@ -8,10 +8,11 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
-Plug 'lepture/vim-jinja'
+" Plug 'lepture/vim-jinja'
 Plug 'alvan/vim-closetag'
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 
+Plug 'leafOfTree/vim-vue-plugin'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -29,7 +30,6 @@ Plug 'junegunn/limelight.vim'
 
 Plug 'rakr/vim-one'
 Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'jaredgorski/spacecamp'
 Plug 'morhetz/gruvbox'
 call plug#end()
 
@@ -65,10 +65,9 @@ let g:airline_symbols.dirty='⚡'
 
 set background=dark " for the dark version
 " set background=light " for the light version
-" colorscheme Tomorrow
-colorscheme one
-" colorscheme gruvbox
-" colorscheme spacecamp
+" colorscheme Tomorrow-Night
+" colorscheme one
+colorscheme gruvbox
 
 set expandtab
 set shiftwidth=2
@@ -122,8 +121,8 @@ nnoremap <C-w>s <C-w>s<C-w><C-w>
 " nnoremap <C-n>h <C-w>s<C-w><C-w>
 
 
-nmap <leader>w :w!<cr>
-nmap <leader>q :q!<cr>
+nnoremap <leader>w :w!<cr>
+nnoremap <leader>q :q!<cr>
 
 " Wrap in try/catch to avoid errors on initial install before plugin is available
 let g:python3_host_prog = '/usr/bin/python'
@@ -140,9 +139,14 @@ endif
 " FZF mappings
 "
 "
-nmap <leader>g :Rg<Space>
-nmap <leader>T :Files<CR>
-nmap <leader>cw :Rg <C-R><C-W><CR>
+nnoremap <leader>g :Ag<Space>
+nnoremap <leader>af :Files<CR>
+nnoremap <leader>t :GFiles<CR>
+nnoremap <leader>ff :Files <C-r>=expand("%:h")<CR>/<CR>
+nnoremap <leader>h :Helptags<CR>
+nnoremap <leader>ss :Lines<CR>
+nnoremap <leader>cw :Rg <C-R><C-W><CR>
+nnoremap <leader>e :Buffers<CR>
 
 
 try
@@ -228,8 +232,8 @@ endtry
 "   <leader>t  - Browse list of files in current directory
 "   <leader>g  - Search current directory for occurences of given term and close window if no results
 "   <leader>cw - Search current directory for occurences of word under cursor
-nmap <leader>e :Denite buffer<CR>
-nmap <leader>t :DeniteProjectDir file/rec<CR>
+" nnoremap <leader>e :Denite buffer<CR>
+" nnoremap <leader>t :DeniteProjectDir file/rec<CR>
 " nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
 " nnoremap <leader>cw :<C-u>DeniteCursorWord grep:.<CR>
 
@@ -399,7 +403,7 @@ vnoremap <Down> :m '>+1<CR>gv=gv
 vnoremap <Up> :m '<-2<CR>gv=gv
 
 " mapping to select single quotes
-nnoremap <leader>sq vi'"+y
+" nnoremap <leader>sq vi'"+y
 " mapping to yank to system clipboard
 vnoremap <leader>y "+y
 
