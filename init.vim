@@ -1,18 +1,24 @@
 call plug#begin('~/.config/nvim/plugged')
+" Navigation
 Plug 'Shougo/denite.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
+" Completions
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'moll/vim-node'
 Plug 'pangloss/vim-javascript'
-" Plug 'lepture/vim-jinja'
 Plug 'alvan/vim-closetag'
-" Plug 'leafOfTree/vim-vue-plugin'
-Plug 'posva/vim-vue'
+Plug 'AndrewRadev/tagalong.vim'
 
+" Syntax | Indents
+Plug 'posva/vim-vue'
+Plug 'Vimjas/vim-python-pep8-indent'
+
+" Utilities
+Plug 'justinmk/vim-sneak'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -20,14 +26,20 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/NrrwRgn'
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim',
+      \ {
+      \   'do': { -> mkdp#util#install() },
+      \   'for': ['markdown', 'vim-plug']
+      \ }
 
+" Aestetics
 Plug 'chrisbra/Colorizer'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/limelight.vim'
 
+Plug 'flrnd/candid.vim'
 Plug 'rakr/vim-one'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'morhetz/gruvbox'
@@ -35,7 +47,7 @@ call plug#end()
 
 " set termguicolors
 syntax on
-let g:airline_theme='one'
+let g:airline_theme='zenburn'
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -67,7 +79,8 @@ set background=dark " for the dark version
 " set background=light " for the light version
 " colorscheme Tomorrow-Night
 " colorscheme one
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme candid
 
 set expandtab
 set shiftwidth=2
@@ -91,10 +104,11 @@ set scrolloff=999
 set title titlestring=%{expand(\"%:p\")}
 set list
 set listchars=trail:~
-" set autochdir
 set statusline^=%{coc#status()}
 set relativenumber
 set foldmethod=indent
+set foldlevel=1
+set cursorline
 
 let g:mkdp_browser = 'firefox'
 
@@ -117,9 +131,6 @@ nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 nnoremap <C-w>v <C-w>v<C-w><C-w>
 nnoremap <C-w>s <C-w>s<C-w><C-w>
-" nnoremap <C-n>v <C-w>v<C-w><C-w>
-" nnoremap <C-n>h <C-w>s<C-w><C-w>
-
 
 nnoremap <leader>w :w!<cr>
 nnoremap <leader>q :q!<cr>
@@ -143,11 +154,13 @@ nnoremap <leader>g :Ag<Space>
 nnoremap <leader>af :Files<CR>
 nnoremap <leader>t :GFiles<CR>
 nnoremap <leader>ff :Files <C-r>=expand("%:h")<CR>/<CR>
+" nnoremap <leader>ff :FZF<CR>
 nnoremap <leader>h :Helptags<CR>
-nnoremap <leader>ss :Lines<CR>
+nnoremap <leader>ss :BLines<CR>
 nnoremap <leader>cw :Rg <C-R><C-W><CR>
+nnoremap <leader>cc :Commands<CR>
 nnoremap <leader>e :Buffers<CR>
-
+nnoremap <leader>m :Maps<CR>
 
 try
   " === Denite setup ==="
@@ -391,8 +404,9 @@ endfunction
 
 nnoremap <leader>bb :call <SID>ToggleBlame()<CR>
 
-nnoremap <leader>fs :set foldmethod=syntax<cr>
-nnoremap <leader>fi :set foldmethod=indent<cr>
+nnoremap <leader>fs :set foldmethod=syntax<CR>
+nnoremap <leader>fi :set foldmethod=indent<CR>
+nnoremap zM :set foldlevel=1<CR>
 
 nmap <Leader>l :Limelight!!<cr>
 nnoremap <Down> :m .+1<CR>==
@@ -416,3 +430,4 @@ let g:LanguageClient_serverCommands = {
 "
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.vue'
 let g:vue_disable_pre_processors=1
+let g:tagalong_filetypes = ['html', 'vue']
