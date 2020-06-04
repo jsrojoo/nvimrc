@@ -47,8 +47,7 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'morhetz/gruvbox'
 call plug#end()
 
-let mapleader = " "
-map \ <leader>
+map <space> <leader>
 
 syntax on
 set background=dark " for the dark version
@@ -153,7 +152,7 @@ nnoremap <leader>q :q!<cr>
 
 nmap [c <plug>(signify-next-hunk):SignifyHunkDiff<cr>
 nmap ]c <plug>(signify-prev-hunk):SignifyHunkDiff<cr>
-nmap <C-A-z> :SignifyHunkUndo<cr>
+nmap <C-A-r> :SignifyHunkUndo<cr>
 
 function! s:ToggleBlame()
     if &l:filetype ==# 'fugitiveblame'
@@ -176,3 +175,4 @@ nmap <Leader>l :Limelight!!<cr>
 
 " mapping to yank to system clipboard
 vnoremap <leader>y "+y
+
