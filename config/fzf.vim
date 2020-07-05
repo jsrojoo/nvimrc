@@ -21,3 +21,19 @@ nnoremap <leader>cw :Rg <C-R><C-W><CR>
 nnoremap <leader>cc :Commands<CR>
 nnoremap <leader>e :Buffers<CR>
 nnoremap <leader>m :Maps<CR>
+
+" fzf colorscheme within vim
+let g:fzf_colors =
+\ { "fg":      ["fg", "Normal"],
+  \ "bg":      ["bg", "Normal"],
+  \ "hl":      ["fg", "IncSearch"],
+  \ "fg+":     ["fg", "CursorLine", "CursorColumn", "Normal"],
+  \ "bg+":     ["bg", "CursorLine", "CursorColumn"],
+  \ "hl+":     ["fg", "IncSearch"],
+  \ "info":    ["fg", "IncSearch"],
+  \ "border":  ["fg", "Ignore"],
+  \ "prompt":  ["fg", "Comment"],
+  \ "pointer": ["fg", "IncSearch"],
+  \ "marker":  ["fg", "IncSearch"],
+  \ "spinner": ["fg", "IncSearch"],
+  \ "header":  ["fg", "WildMenu"] }

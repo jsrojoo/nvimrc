@@ -15,13 +15,13 @@ snippet afe
 options head
     afterEach(function() {
         ${0:target}
-    })
+    });
 
 snippet ds
 options head
     describe('${1:description}', function() {
         ${0:TARGET}
-    })
+    });
 
 snippet cplug
 options head
@@ -100,4 +100,8 @@ abbr        sc
 
 snippet     cl
 options     head
- console.log(\`${0}\`, $0, '\n');
+ console.log('\n', '${0}', $0, '\n');
+
+snippet     db
+options     word
+        172.17.0.2

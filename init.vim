@@ -23,8 +23,10 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
 Plug 'chrisbra/NrrwRgn'
 Plug 'jiangmiao/auto-pairs'
+Plug 'wellle/targets.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'benmills/vimux'
 Plug 'iamcco/markdown-preview.nvim',
@@ -43,8 +45,8 @@ Plug 'junegunn/limelight.vim'
 " Colorschemes
 Plug 'flrnd/candid.vim'
 Plug 'rakr/vim-one'
+Plug 'drewtempelmeyer/palenight.vim'
 Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'morhetz/gruvbox'
 call plug#end()
 
 map <space> <leader>
@@ -52,10 +54,8 @@ map <space> <leader>
 syntax on
 set background=dark " for the dark version
 " set background=light " for the light version
-" colorscheme Tomorrow-Night
-" colorscheme one
-" colorscheme gruvbox
-colorscheme candid
+colorscheme palenight
+highlight Normal guibg=NONE ctermbg=NONE
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -76,8 +76,9 @@ source ~/.local/share/nvim/site/config/signify.vim
 source ~/.local/share/nvim/site/config/fzf.vim
 source ~/.local/share/nvim/site/config/netrw.vim
 source ~/.local/share/nvim/site/config/vimux.vim
-source ~/.local/share/nvim/site/config/maps/neosnippet.vim
-source ~/.local/share/nvim/site/config/maps/coc.vim
+source ~/.local/share/nvim/site/config/nrrw_rgn.vim
+source ~/.local/share/nvim/site/config/neosnippet.vim
+source ~/.local/share/nvim/site/config/coc.vim
 
 " lsp for vue using vls for vetur
 let g:LanguageClient_serverCommands = {
@@ -88,16 +89,29 @@ let g:LanguageClient_serverCommands = {
 " These are the file extensions where this plugin is enabled.
 "
 " closetag config
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.vue'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.vue, *.markdown'
 
 " vimvue config
 let g:vue_disable_pre_processors=1
 
 " tag along config
-let g:tagalong_filetypes = ['html', 'vue']
+let g:tagalong_filetypes = ['html', 'vue', 'md']
 
 " browser to use when opening links / files like markdown
 let g:mkdp_browser = 'firefox'
+let g:mkdp_refresh_slow = 1
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 1,
+    \ 'sync_scroll_type': 'top',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false
+    \ }
 
 " Wrap in try/catch to avoid errors on initial install before plugin is available
 let g:python3_host_prog = '/home/rojo/.pyenv/versions/simone/bin/python'
@@ -114,29 +128,38 @@ set shiftwidth=2
 set softtabstop=2
 
 set timeoutlen=1000 ttimeoutlen=0
-set nobackup  " no backup or swap file, live dangerously
-set noswapfile  " swap files give annoying warning
-set nowrap
-set nowrapscan " stop incremental search at EOF
-set number  " always show current line number
+
 set ignorecase " ignorecasing
 set smartcase  " better case-sensitivity when searching
-set noshowmode  " keep command line clean
+
+set number  " always show current line number
+set relativenumber
+
 set updatetime=500
 set signcolumn=yes
 set colorcolumn=90
 set textwidth=80
-set nohlsearch
 set scrolloff=999
-set title titlestring=%{expand(\"%:p\")}
+
 set list
 set listchars=trail:~
 set statusline^=%{coc#status()}
-set relativenumber
-set foldmethod=indent
-set foldlevel=1
-set cursorline
-set invlist
+set title titlestring=%{expand(\"%:p\")}
+
+set foldmethod=syntax
+set hidden
+set mouse:a
+
+set nowrap
+set nobackup  " no backup or swap file, live dangerously
+set noswapfile  " swap files give annoying warning
+set nowrapscan " stop incremental search at EOF
+set noshowmode  " keep command line clean
+set noshowcmd  " keep command line clean
+set nohlsearch
+
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
 
 nnoremap Q @q
 "" easy split movement
@@ -166,7 +189,7 @@ nnoremap <leader>bb :call <SID>ToggleBlame()<CR>
 
 nnoremap <leader>fs :set foldmethod=syntax<CR>
 nnoremap <leader>fi :set foldmethod=indent<CR>
-nnoremap zM :set foldlevel=1<CR>
+" nnoremap zM :set foldlevel=0<CR>
 
 nmap <Leader>l :Limelight!!<cr>
 
@@ -176,3 +199,4 @@ nmap <Leader>l :Limelight!!<cr>
 " mapping to yank to system clipboard
 vnoremap <leader>y "+y
 
+nnoremap <leader>cm :CocCommand markmap.create<cr>
