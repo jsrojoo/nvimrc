@@ -58,3 +58,6 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+inoremap <silent><expr> <c-space> coc#refresh()
+
+let g:coc_snippet_next = '<tab>'

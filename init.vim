@@ -1,105 +1,15 @@
-call plug#begin('~/.config/nvim/plugged')
-" Navigation
-" Plug 'Shougo/denite.nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'yuttie/comfortable-motion.vim'
+source ~/.local/share/nvim/site/config/plugins.vim
 
-" Completions
-Plug 'AndrewRadev/tagalong.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'Shougo/neosnippet.vim'
-Plug 'alvan/vim-closetag'
-Plug 'moll/vim-node'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-Plug 'pangloss/vim-javascript'
-
-" Syntax | Indents
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'posva/vim-vue'
-Plug 'nathanaelkane/vim-indent-guides'
-
-" Utilities
-Plug 'benmills/vimux'
-Plug 'chrisbra/NrrwRgn'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'jiangmiao/auto-pairs'
-Plug 'justinmk/vim-sneak'
-Plug 'metakirby5/codi.vim'
-Plug 'osyo-manga/vim-over'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'unblevable/quick-scope'
-Plug 'wellle/targets.vim'
-Plug 'iamcco/markdown-preview.nvim',
-      \ {
-      \   'do': { -> mkdp#util#install() },
-      \   'for': ['markdown', 'vim-plug']
-      \ }
-Plug 'heavenshell/vim-jsdoc', {
-  \ 'for': ['javascript', 'javascript.jsx','typescript'],
-  \ 'do': 'make install'
-\}
-
-
-" Aestetics
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'junegunn/limelight.vim'
-Plug 'mhinz/vim-signify'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" Colorschemes
-Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'flrnd/candid.vim'
-Plug 'rakr/vim-one'
-call plug#end()
-
-map <space> <leader>
-
-" unblevable/quick-scope color configuration
-augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary ctermfg=155 cterm=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary ctermfg=81 cterm=underline
-augroup END
-
-syntax on
-" set background=dark " for the dark version
-" set background=light " for the light version
-colorscheme palenight
-highlight Normal guibg=NONE ctermbg=NONE
-hi Search guibg=gray guifg=wheat
-
-
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (has("nvim"))
-  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-if (has("termguicolors"))
-  set termguicolors
-endif
-
-lua require'colorizer'.setup()
-
+source ~/.local/share/nvim/site/config/colors.vim
 source ~/.local/share/nvim/site/config/airline.vim
 source ~/.local/share/nvim/site/config/signify.vim
 source ~/.local/share/nvim/site/config/fzf.vim
 source ~/.local/share/nvim/site/config/netrw.vim
 source ~/.local/share/nvim/site/config/vimux.vim
 source ~/.local/share/nvim/site/config/nrrw_rgn.vim
-source ~/.local/share/nvim/site/config/neosnippet.vim
 source ~/.local/share/nvim/site/config/coc.vim
+
+map <space> <leader>
 
 " unblevable/quick-scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -109,10 +19,9 @@ let g:LanguageClient_serverCommands = {
     \ 'vue': ['vls']
     \ }
 
+" closetag config
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
-"
-" closetag config
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.vue, *.markdown'
 
 " vimvue config
@@ -121,7 +30,7 @@ let g:vue_disable_pre_processors=1
 " tag along config
 let g:tagalong_filetypes = ['html', 'vue', 'md']
 
-" browser to use when opening links / files like markdown
+" markdown preview: browser to use when opening links / files like markdown
 let g:mkdp_browser = 'firefox'
 let g:mkdp_refresh_slow = 1
 let g:mkdp_preview_options = {
@@ -137,19 +46,31 @@ let g:mkdp_preview_options = {
     \ 'content_editable': v:false
     \ }
 
-" Wrap in try/catch to avoid errors on initial install before plugin is available
 let g:python3_host_prog = '/home/rojo/.pyenv/versions/simone/bin/python'
 
-let g:neosnippet#snippets_directory="/home/rojo/.local/share/nvim/site/custom-snippets"
+" let g:neosnippet#snippets_directory="/home/rojo/.local/share/nvim/site/custom-snippets"
 
 " sneak hints
-let g:sneak#label = 1
+" let g:sneak#label = 1
 " sneak search to use ignorecase and smartcase
 let g:sneak#use_ic_scs = 1
 
 highlight Sneak guifg=black guibg=red ctermfg=black ctermbg=red
 highlight SneakScope guifg=red guibg=yellow ctermfg=red ctermbg=yellow
 highlight SneakLabel guifg=red guibg=yellow ctermfg=black ctermbg=yellow
+
+" Smalls plugin
+" map normal-mode 's' for simple search
+nmap s <Plug>(smalls)
+" if you want to use smalls in visual/operator or both mode.
+omap s <Plug>(smalls)
+xmap s <Plug>(smalls)
+let g:smalls_shade = 0
+" vim smalls plugin, make space character as trigger
+let g:smalls_jump_keys= ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+" remove brackets on empty lines
+let &fcs='eob: '
 
 set expandtab
 set shiftwidth=2
@@ -164,10 +85,10 @@ set number  " always show current line number
 set relativenumber
 
 set updatetime=500
-set signcolumn=yes
-set colorcolumn=80
-set textwidth=80
-" set scrolloff=999
+set signcolumn=no
+set colorcolumn=75
+set textwidth=75
+set scrolloff=999
 
 set list
 set listchars=trail:~
@@ -185,6 +106,7 @@ set nowrapscan " stop incremental search at EOF
 set noshowmode  " keep command line clean
 " set noshowcmd  " keep command line clean
 set hlsearch
+set pumheight=3
 
 " use vertical cursor on insert mode
 set guicursor=i:ver1
@@ -196,12 +118,13 @@ autocmd InsertLeave * set nocul
 
 nnoremap Q @q
 "" easy split movement
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-n> <C-w>j
+nnoremap <M-e> <C-w>k
+nnoremap <M-i> <C-w>l
 nnoremap <C-w>v <C-w>v<C-w><C-w>
 nnoremap <C-w>s <C-w>s<C-w><C-w>
+nnoremap <C-w>r <C-w>s<C-w><C-w>
 
 nnoremap <leader>w :w!<cr>
 nnoremap <leader>q :q!<cr>
@@ -236,16 +159,16 @@ nnoremap <leader>cm :CocCommand markmap.create<cr>
 
 " indent guide toggle
 nnoremap <leader>id :IndentGuidesToggle<cr>
-
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=2
+let g:indent_guides_auto_colors = 1
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=1
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=orange ctermbg=2
 
 " yuttie/comfortable-motion.vim
 let g:comfortable_motion_interval = 100 / 60
 let g:comfortable_motion_friction = 300.0
 let g:comfortable_motion_air_drag = 0.0
 
+" vim over helper functions and mappings
 function! VisualFindAndReplace()
     :OverCommandLine%s/
 endfunction
@@ -256,3 +179,26 @@ endfunction
 
 nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
 xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
+
+" vimux mappings
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-n> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-e> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+
+" Colemak bindings
+nnoremap n j
+nnoremap e k
+nnoremap L J
+" nnoremap l e
+" nnoremap L E
+vnoremap n j
+vnoremap e k
+" vnoremap l e
+" vnoremap L E
+nnoremap k n
+nnoremap K N
+vnoremap k n
+vnoremap K N

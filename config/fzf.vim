@@ -10,16 +10,17 @@ endif
 " FZF mappings
 "
 "
-nnoremap <leader>g :Ag<Space>
-nnoremap <leader>af :Files<CR>
-nnoremap <leader>t :GFiles<CR>
+nnoremap <leader>ag :Ag<Space>
+nnoremap <leader>fa :Files<CR>
+nnoremap <leader><space> :Buffers<CR>
+nnoremap <leader>fg :GFiles<CR>
 nnoremap <leader>ff :Files <C-r>=expand("%:h")<CR>/<CR>
 " nnoremap <leader>ff :FZF<CR>
-nnoremap <leader>h :Helptags<CR>
+nnoremap <leader>fh :Helptags<CR>
 nnoremap <leader>ss :BLines<CR>
 nnoremap <leader>cw :Rg <C-R><C-W><CR>
 nnoremap <leader>cc :Commands<CR>
-nnoremap <leader>e :Buffers<CR>
+" nnoremap <leader>e :Buffers<CR>
 nnoremap <leader>m :Maps<CR>
 
 " fzf colorscheme within vim
