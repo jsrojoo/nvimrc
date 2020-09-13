@@ -1,7 +1,7 @@
 
 " vim's native file explorer config
 " Add your own mapping. For example:
-noremap <silent> <A-e> :call ToggleNetrw()<CR>
+noremap <silent> <leader>e :call ToggleNetrw()<CR>
 
 let g:netrw_banner = 0
 let g:netrw_winsize = 20

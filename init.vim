@@ -191,7 +191,7 @@ nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 " Colemak bindings
 nnoremap n j
 nnoremap e k
-nnoremap L J
+nnoremap L e
 " nnoremap l e
 " nnoremap L E
 vnoremap n j

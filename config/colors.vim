@@ -1,16 +1,9 @@
-" unblevable/quick-scope color configuration
-augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg=155 gui=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg=81 gui=underline
-augroup END
-
 syntax on
 " set background=dark " for the dark version
 " set background=light " for the light version
 colorscheme palenight
 highlight Normal guibg=NONE ctermbg=NONE
-hi Search guibg=grey guifg=wheat
+hi Search guibg=NONE guifg=lightgreen
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -28,3 +21,9 @@ endif
 
 lua require'colorizer'.setup()
 
+" unblevable/quick-scope color configuration
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg=lightgreen gui=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg=lightgreen gui=underline
+augroup END

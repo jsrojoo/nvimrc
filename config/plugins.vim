@@ -19,7 +19,6 @@ Plug 'posva/vim-vue'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Utilities
-Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 
 Plug 'benmills/vimux'
