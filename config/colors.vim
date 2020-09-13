@@ -1,10 +1,3 @@
-syntax on
-" set background=dark " for the dark version
-" set background=light " for the light version
-colorscheme palenight
-highlight Normal guibg=NONE ctermbg=NONE
-hi Search guibg=NONE guifg=lightgreen
-
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
@@ -19,11 +12,17 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+syntax on
+colorscheme palenight
+highlight Normal guibg=NONE ctermbg=NONE
+highlight Search guibg=NONE guifg=lightgreen
+
 lua require'colorizer'.setup()
 
 " unblevable/quick-scope color configuration
-augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg=lightgreen gui=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg=lightgreen gui=underline
-augroup END
+" augroup qs_colors
+"   autocmd!
+"   autocmd ColorScheme * highlight QuickScopePrimary guifg=lightgreen
+"   gui=NONE
+"   autocmd ColorScheme * highlight QuickScopeSecondary guifg=lightgreen gui=NONE
+" augroup END

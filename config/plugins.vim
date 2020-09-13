@@ -19,12 +19,9 @@ Plug 'posva/vim-vue'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Utilities
-Plug 'rbgrouleff/bclose.vim'
-
 Plug 'benmills/vimux'
 Plug 'chrisbra/NrrwRgn'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'jiangmiao/auto-pairs'
 Plug 't9md/vim-smalls'
 Plug 'metakirby5/codi.vim'
 Plug 'osyo-manga/vim-over'
@@ -33,7 +30,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
 Plug 'wellle/targets.vim'
 Plug 'iamcco/markdown-preview.nvim',
       \ {
@@ -49,9 +46,9 @@ Plug 'heavenshell/vim-jsdoc', {
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'mhinz/vim-signify'
-Plug 'norcalli/nvim-colorizer.lua'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " Colorschemes
 Plug 'chriskempson/vim-tomorrow-theme'

@@ -1,5 +1,5 @@
-
 " coc mappings
+
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " gd - go to definition of word under cursor
