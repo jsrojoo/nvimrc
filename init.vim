@@ -3,6 +3,7 @@ source ~/.local/share/nvim/site/config/defaults.vim
 source ~/.local/share/nvim/site/config/plugins.vim
 
 source ~/.local/share/nvim/site/config/colors.vim
+source ~/.local/share/nvim/site/config/airline.vim
 source ~/.local/share/nvim/site/config/signify.vim
 source ~/.local/share/nvim/site/config/fzf.vim
 source ~/.local/share/nvim/site/config/netrw.vim
